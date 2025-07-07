@@ -7,7 +7,6 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.sql.CallableStatement;
 
 @WebServlet("/chklogin")
 public class LoginServlet extends HttpServlet {
