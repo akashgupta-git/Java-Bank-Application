@@ -6,11 +6,16 @@ import java.sql.SQLException;
 
 public class DBUtil {
 
-	private static final String URL = "jdbc:mysql://localhost:3306/Axis_Bank"; // change db name if needed
-	private static final String USERNAME = "root"; // your MySQL username
+	private static final String URL = "jdbc:mysql://localhost:3306/Axis_Bank?useSSL=false&serverTimezone=UTC";
+	private static final String USERNAME = "root";     // your MySQL username
 	private static final String PASSWORD = "password"; // your MySQL password
 
 	public static Connection getConnection() throws SQLException {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver"); // Load MySQL JDBC driver
+		} catch (ClassNotFoundException e) {
+			throw new SQLException("MySQL JDBC driver not found", e);
+		}
 		return DriverManager.getConnection(URL, USERNAME, PASSWORD);
 	}
 }
