@@ -36,7 +36,7 @@ public class RegisterServlet extends HttpServlet {
         boolean success = new CustomerDAL().insertCustomer(customer);
 
         if (success) {
-            response.sendRedirect("login.html");
+            response.sendRedirect("login");
         } else {
             out.println("<h3 style='color:red;'>Registration failed. Try again.</h3>");
         }
