@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.pojo.Transaction"%>
+<%@ page import="java.text.NumberFormat"%>
 <%@ page session="true"%>
 <%
 String username = (String) session.getAttribute("username");
@@ -9,7 +10,20 @@ if (username == null) {
 	return;
 }
 
-List<Transaction> txList = (List<Transaction>) request.getAttribute("txList");
+String filter = request.getParameter("filter");
+if (filter == null)
+	filter = "all";
+
+List<Transaction> fullList = (List<Transaction>) request.getAttribute("txList");
+List<Transaction> txList = new ArrayList<>();
+
+for (Transaction tx : fullList) {
+	if ("all".equals(filter) || tx.getType().equalsIgnoreCase(filter)) {
+		txList.add(tx);
+	}
+}
+
+NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,10 +38,23 @@ List<Transaction> txList = (List<Transaction>) request.getAttribute("txList");
 	<div class="container mt-5">
 		<h2 class="text-primary text-center mb-4">📜 Transaction History</h2>
 
+		<!-- Filter -->
+		<form method="get" class="mb-4 text-center">
+			<label for="filter" class="me-2 fw-semibold">Filter:</label> <select
+				name="filter" id="filter" onchange="this.form.submit()"
+				class="form-select w-auto d-inline-block">
+				<option value="all" <%="all".equals(filter) ? "selected" : ""%>>All</option>
+				<option value="deposit"
+					<%="deposit".equals(filter) ? "selected" : ""%>>Deposit</option>
+				<option value="withdraw"
+					<%="withdraw".equals(filter) ? "selected" : ""%>>Withdraw</option>
+			</select>
+		</form>
+
 		<div class="card shadow">
 			<div class="card-body">
 				<%
-				if (txList != null && !txList.isEmpty()) {
+				if (!txList.isEmpty()) {
 				%>
 				<table class="table table-bordered table-striped text-center">
 					<thead class="table-dark">
@@ -45,9 +72,8 @@ List<Transaction> txList = (List<Transaction>) request.getAttribute("txList");
 						%>
 						<tr>
 							<td><%=count++%></td>
-							<td><%=tx.getType()%></td>
-							<td>&#8377;<%=tx.getAmount()%></td>
-							<!-- ₹ symbol -->
+							<td><%=tx.getType().toUpperCase()%></td>
+							<td><%=currencyFormat.format(tx.getAmount())%></td>
 							<td><%=tx.getTimestamp()%></td>
 						</tr>
 						<%
@@ -58,7 +84,8 @@ List<Transaction> txList = (List<Transaction>) request.getAttribute("txList");
 				<%
 				} else {
 				%>
-				<p class="text-center text-muted">No transactions found.</p>
+				<p class="text-center text-muted">No transactions found for this
+					filter.</p>
 				<%
 				}
 				%>

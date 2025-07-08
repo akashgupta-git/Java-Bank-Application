@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 				out.println("</head><body class='bg-light d-flex align-items-center justify-content-center vh-100'>");
 				out.println("<div class='card p-4 shadow text-center' style='min-width: 350px;'>");
 				out.println("<h3 class='mb-3 text-danger'>Invalid Credentials!</h3>");
-				out.println("<a href='login' class='btn btn-primary'>Try Again</a>");
+				out.println("<a href='login.jsp' class='btn btn-primary'>Try Again</a>");
 				out.println("</div></body></html>");
 			}
 
