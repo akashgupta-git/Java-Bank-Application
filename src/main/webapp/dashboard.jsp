@@ -3,7 +3,7 @@
 <%
 String username = (String) session.getAttribute("username");
 if (username == null) {
-	response.sendRedirect("login.html");
+	response.sendRedirect("login.jsp");
 	return;
 }
 %>
@@ -39,11 +39,11 @@ if (username == null) {
 					Withdraw</a>
 			</div>
 			<div class="col-md-3">
-				<a href="balance" class="btn btn-info btn-lg w-100">📊
+				<a href="balance.jsp" class="btn btn-info btn-lg w-100">📊
 					Check Balance</a>
 			</div>
 			<div class="col-md-3">
-				<a href="transactions" class="btn btn-secondary btn-lg w-100">📜
+				<a href="transactions.jsp" class="btn btn-secondary btn-lg w-100">📜
 					Transactions</a>
 			</div>
 			<div class="col-md-3">

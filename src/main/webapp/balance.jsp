@@ -5,7 +5,7 @@ String username = (String) session.getAttribute("username");
 Double balance = (Double) request.getAttribute("balance");
 
 if (username == null || balance == null) {
-	response.sendRedirect("login.html");
+	response.sendRedirect("login.jsp");
 	return;
 }
 %>

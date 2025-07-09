@@ -24,7 +24,7 @@ public class WithdrawServlet extends HttpServlet {
 		Integer customerId = (session != null) ? (Integer) session.getAttribute("customerId") : null;
 
 		if (email == null || customerId == null) {
-			response.sendRedirect("login");
+			response.sendRedirect("login.jsp");
 			return;
 		}
 

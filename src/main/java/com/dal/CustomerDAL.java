@@ -7,17 +7,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Data Access Layer for Customer operations.
- */
+/* Data Access Layer for Customer operations. */
 public class CustomerDAL {
 
-	/**
-	 * Inserts a new customer into the database.
-	 *
-	 * @param cust the customer object
-	 * @return true if inserted successfully, false otherwise
-	 */
+	/** Inserts a new customer into the database.
+	 * @return true if inserted successfully, false otherwise **/
 	public boolean insertCustomer(Customer cust) {
 		String sql = "INSERT INTO customers (name, email, password) VALUES (?, ?, ?)";
 
@@ -36,11 +30,8 @@ public class CustomerDAL {
 		return false;
 	}
 
-	/**
-	 * Retrieves all customers from the database.
-	 *
-	 * @return list of customers
-	 */
+	/** Retrieves all customers from the database.
+	 * return list of customers **/
 	public List<Customer> getAllCustomers() {
 		List<Customer> list = new ArrayList<>();
 		String sql = "SELECT * FROM customers";

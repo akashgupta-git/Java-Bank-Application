@@ -20,7 +20,7 @@ public class BalanceServlet extends HttpServlet {
 		String email = (String) session.getAttribute("email");
 
 		if (email == null || email.trim().isEmpty()) {
-			response.sendRedirect("login");
+			response.sendRedirect("login.jsp");
 			return;
 		}
 
